@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UFT-8">
+        <title>Doum : 생활기록부 도서 추천</title>
+        <style>
+        body{
+          background-color: #ECF0F3;
+          }
+        @font-face {
+          font-family: 'GmarketSansMedium';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'GmarketSansBold';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        </style>
+        <style>
+        .left_bar{
+          height: 100%;
+          max-width: 0;
+          background-color: #ffffff;
+          text-align: center;
+          transition: 0.3s ease;
+          z-index: 1;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .team_title{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-size: 250%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 0px;
+          left: 70px;
+        }
+        .left_title_01{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 90px;
+          left: 30px;
+        }
+        .left_title_02{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 90px;
+          left: 125px;
+        }
+        .hashtag_subject_title{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 140px;
+          left: 35px;
+        }
+        .hashtag_subject_choice{
+          width: 300px;
+          max-width: 0;
+          font-size: 120%;
+          line-height: 180%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 195px;
+          left: 35px;
+          display: none;
+        }
+        .hashtag_feature_title{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 300px;
+          left: 35px;
+        }
+        .hashtag_feature_choice{
+          width: 300px;
+          max-width: 0;
+          font-size: 120%;
+          line-height: 180%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 355px;
+          left: 35px;
+          display: none;
+        }
+        input[id="Korean"],[id="science"],[id="socialstudy"],[id="math"],[id="english"],[id="culture"],[id="introduction"],[id="speciality"]{
+          position: relative;
+          top: 2.5px;
+        }
+        .burger-icon{
+          cursor: pointer;
+          display: inline-block;
+          position: absolute;
+          z-index: 4;
+          padding: 8px 0;
+          top: 30px;
+          left: 40px;
+          user-select: none;
+          width: auto;
+          margin: 0;
+        }
+        .burger-icon .burger-sticks{
+          background: grey;
+          display: block;
+          height: 3px;
+          position: relative;
+          width: 30px;
+        }
+        .burger-icon .burger-sticks:before,
+        .burger-icon .burger-sticks:after{
+          background: grey;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          width: 100%;
+        }
+        .burger-icon .burger-sticks:before{
+          top: 5px;
+        }
+        .burger-icon .burger-sticks:after{
+          top: -5px;
+        }
+        .burger-check{
+          display: none;
+        }
+        .burger-check:checked~.left_bar{
+          max-width: 300px;
+        }
+        .burger-check:checked~.team_title,
+        .burger-check:checked~.left_title_01,
+        .burger-check:checked~.left_title_02{
+          max-width: 200px;
+        }
+        .burger-check:checked~.hashtag_subject_title,
+        .burger-check:checked~.hashtag_subject_choice,
+        .burger-check:checked~.hashtag_feature_title,
+        .burger-check:checked~.hashtag_feature_choice{
+          max-width: 200px;
+        }
+        .burger-check:checked~.burger-icon .burger-sticks{
+          background: transparent;
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before{
+          width: 20px;
+          position: absolute;
+          top: 0px;
+          left: 210px;
+          transform: rotate(-45deg);
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after{
+          width: 20px;
+          position: absolute;
+          top: 0px;
+          left: 210px;
+          transform: rotate(45deg);
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before,
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after{
+          top: 0;
+        }
+        .burger-check:checked~.hashtag_feature_choice,
+        .burger-check:checked~.hashtag_subject_choice{
+          display: block;
+        }
+        </style>
+        <style>
+        #header{
+          height: 20%;
+          width: 96%;
+          margin-top: -0.5%;
+          margin-bottom: -0.5%;
+          margin-left: 2%;
+          margin-right: 2%;
+          font-size: 170%;
+          font-family: 'GmarketSansMedium';
+          text-align: center;
+        }
+        #recommend{
+          width: 21%;
+          height: 78.5%;
+          margin-top: -1%;
+          margin-left: 3%;
+          margin-right: 3%;
+          padding-top: 2%;
+          padding-left: 2%;
+          border-top-left-radius: 40px;
+          border-bottom-left-radius: 40px;
+          box-shadow: 5px 5px 15px rgb(197, 197, 197);
+          text-align: left;
+          font-family: 'GmarketSansBold';
+          position: fixed;
+          top: 120px;
+          left: 0px;
+        }
+        .recommend_title{
+          font-size: 15px;
+          font-family: 'GmarketSansMedium';
+          margin-bottom: -2%;
+        }
+        button{
+          text-align: left;
+          background-color: #ECF0F3;
+          border-style: none;
+          font-size: 15px;
+          line-height: 230%;
+          font-family: 'GmarketSansMedium';
+        }
+        input[id="first_recommend"],[id="second_recommend"],[id="third_recommend"],[id="random_recommend"]{
+          position: relative;
+          top: 2px;
+        }
+        </style>
+        <style>
+        #about_book{
+          width: 41.1%;
+          height: 78.6%;
+          margin-top: -1%;
+          margin-right: 3%;
+          padding-top: 2%;
+          padding-left: 2%;
+          border-top-right-radius: 40px;
+          border-bottom-right-radius: 40px;
+          box-shadow: 5px 5px 15px rgb(197, 197, 197);
+          text-align: left;
+          font-family: 'GmarketSansMedium';
+          position: fixed;
+          top: 120px;
+          left: 374px;
+        }
+        .book_image{
+          position: fixed;
+          top: 160px;
+          left: 420px;
+        }
+        .book_title{
+          text-align: center;
+          font-size: 180%;
+          font-family: 'GmarketSansBold';
+          position: fixed;
+          top: 140px;
+          left: 580px;
+        }
+        .author{
+          text-align: center;
+          font-size: 140%;
+          position: fixed;
+          top: 200px;
+          left: 580px;
+        }
+        .publisher{
+          text-align: center;
+          font-size: 140%;
+          position: fixed;
+          top: 200px;
+          left: 800px;
+        }
+        .subject{
+          text-align: center;
+          font-size: 120%;
+          position: fixed;
+          top: 250px;
+          left: 580px;
+        }
+        .subject_contents{
+          text-align: center;
+          font-size: 120%;
+          position: fixed;
+          top: 250px;
+          left: 670px;
+        }
+        .avg_points_png{
+          position: fixed;
+          top: 310px;
+          left: 580px; 
+        }
+        .avg_points_score_contents{
+          font-size: 120%;
+          position: fixed;
+          top: 295px;
+          left: 745px; 
+        }
+        .avg_points_score{
+          font-size: 110%;
+          position: fixed;
+          top: 297px;
+          left: 780px; 
+        }
+        </style>
+        <style>
+        #review{
+          width: 37%;
+          height: 325px;
+          border-radius: 30px;
+          background-color: white;
+          padding-left: 2%;
+          text-align: left;
+          font-family: 'GmarketSansMedium';
+          position: fixed;
+          top: 380px;
+          left: 405px; 
+        }
+        .review_title{
+          font-size: 150%;
+        }
+        .review_comment_image_01{
+          position: fixed;
+          top: 455px;
+          left: 430px; 
+        }
+        .review_comment_id_01{
+          font-size: 130%;
+          position: fixed;
+          top: 450px;
+          left: 500px; 
+        }
+        .review_comment_stars_01{
+          position: fixed;
+          top: 467px;
+          left: 580px; 
+        }
+        .review_comment_image_02{
+          position: fixed;
+          top: 525px;
+          left: 430px; 
+        }
+        .review_comment_id_02{
+          font-size: 130%;
+          position: fixed;
+          top: 520px;
+          left: 500px; 
+        }
+        .review_comment_stars_02{
+          position: fixed;
+          top: 537px;
+          left: 580px; 
+        }
+        .review_comment_image_03{
+          position: fixed;
+          top: 595px;
+          left: 430px; 
+        }
+        .review_comment_id_03{
+          font-size: 130%;
+          position: fixed;
+          top: 590px;
+          left: 500px; 
+        }
+        .review_comment_stars_03{
+          position: fixed;
+          top: 607px;
+          left: 580px; 
+        }
+        #end{
+          text-align: right;
+          font-family: 'GmarketSansMedium';
+        }
+        .end_title{
+          font-size: 130%;
+          position: fixed;
+          top: 710px;
+          left: 730px;
+        }
+        .end_image{
+          position: fixed;
+          top: 728px;
+          left: 910px;
+        }
+        </style>
+        <style>
+        #right_bar{
+          width: 25%;
+          height: 82%;
+          margin-top: -1%;
+          margin-right: 3%;
+          border-radius: 40px;
+          background-color: #ECF0F3;
+          box-shadow: 5px 5px 15px rgb(197, 197, 197);
+          font-size: 250%;
+          text-align: center;
+          letter-spacing: -1px;
+          word-spacing: 1px;
+          font-family: 'GmarketSansBold';
+          position: fixed;
+          top: 120px;
+          right: 0px;
+        }
+        .right_title{
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          margin-top: -3%;
+          margin-left: 8%;
+          margin-right: 8%;
+          line-height: 150%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+        }
+        #right_rank{
+          width: 95%;
+          height: 100%;
+          margin-top: -6%;
+          margin-left: 3%;
+          margin-right: 3%;
+          font-size: 50%;
+          text-align: center;
+          font-family: 'GmarketSansMedium';
+        }
+        .first_rank{
+          margin-left: 7%;
+          margin-right: 7%;
+          text-align: left;
+        }
+        .first_rank_title_01{
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+        }
+        .first_rank_title_03{
+          margin-top: -2%;
+          line-height: 150%;
+        }
+        .second_rank{
+          margin-top: 1%;
+          margin-left: 7%;
+          margin-right: 7%;
+          text-align: left;
+        }
+        .second_rank_title_01{
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+        }
+        .second_rank_title_03{
+          margin-top: -2%;
+          line-height: 150%;
+        }
+        </style>
+        <style>
+        hr{
+          text-align: center;
+        }
+        </style>
+    </head>
+    <body>
+      <input class="burger-check" type="checkbox" id="burger-check" /><label class="burger-icon" for="burger-check"><span class="burger-sticks"></span></label>
+      <div class="left_bar" style="width: 300px;"></div>
+      <div class="team_title">
+        <p>코사인팀</p>
+      </div>
+      <p class="left_title_01" style="display: inline-block;">#해시태그</p>
+      <p class="left_title_02" style="display: inline-block;">로 책 검색하기</p>
+      <div class="hashtag_subject_title">
+         <p>과목별</p>
+      </div>
+      <div class="hashtag_subject_choice">
+        <label></label><input style="zoom:1.5;" type="checkbox" id="Korean" name="Korean" value="1">#국어</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="science" name="science" value="2">#과학</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="socialstudy" name="socialstudy" value="3">#사회</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="math" name="math" value="4">#수학</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="english" name="english" value="5">#영어</label>
+      </div>
+      <div class="hashtag_feature_title">
+        <p>책의 특성</p>
+      </div>
+      <div class="hashtag_feature_choice">
+        <label><input style="zoom:1.5;" type="checkbox" id="culture" name="culture" value="6">#교양</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="introduction" name="introduction" value="7">#입문</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="speciality" name="speciality" value="8">#전문</label>
+      </div>  
+      <div id="header">
+        <p>Doum</p>
+      </div>
+      <hr size="3" width="97%" color="grey">
+      <div id="recommend">
+        <div class="recommend_title">
+          <p>도서 추천</p>
+        </div>
+        <button>
+          <form method="get">
+          <label><input style="zoom:1;" type="checkbox" id="first_recommend" name="recommend_book" value="1" onclick="oneCheckbox(this)"> [1순위]
+            <label>프리드버그 선형대수학(5판)</label>
+          </label><br>
+          <label><input style="zoom:1;" type="checkbox" id="second_recommend" name="recommend_book" value="2"onclick="oneCheckbox(this)"> [2순위]</label>
+            <label>수학비타민 플러스</label>
+          <label><br>
+          <label><input style="zoom:1;" type="checkbox" id="third_recommend" name="recommend_book" value="3"onclick="oneCheckbox(this)"> [3순위]</label>
+            <label>알고보면 쓸데있는 과학 지식</label>
+          <label><br>
+          <label><input style="zoom:1;" type="checkbox" id="random_recommend" name="recommend_book" value="4"onclick="oneCheckbox(this)"> [랜덤]</label>
+            <label>영어가 세상을 지배한다</label>
+          <label><br>
+          </form>
+        </button>
+        <script>
+          function oneCheckbox(a){
+          var obj = document.getElementsByName("recommend_book");
+          for(var i=0; i<obj.length; i++){
+          if(obj[i] != a){
+          obj[i].checked = false;
+              }
+            }
+          }   
+        </script> 
+      </div>
+      <div id="about_book">
+        <div class="book_image">
+          <img src="http://image.kyobobook.co.kr/images/book/xlarge/910/x9791156644910.jpg" width="30%" alt="book">
+        </div>
+        <div class="book_title">
+          <p>프리드버그 선형대수학(5판)</p>
+        </div>
+        <div class="author">
+          <p>스티븐 H. 프리드버그</p>
+        </div>
+        <div class="publisher">
+          <p>/ 한빛아카데미</p>
+        </div>
+        <div class="subject">
+          <p>관련 과목</p>
+        </div>
+        <div class="subject_contents">
+          <p>수학</p>
+        </div>
+        <div id="avg_points">
+          <div class="avg_points_png">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+          </div>
+          <div class="avg_points_score_contents">
+            <p> 3.0</p>
+          </div>
+          <div class="avg_points_score">
+            <p>/ 5.0</p>
+          </div>
+        </div>
+      </div>
+      <div id="review">
+        <div class="review_title">
+          <p>리뷰</p>
+        </div>
+        <div id="review_commment_01">
+          <div class="review_comment_image_01">
+            <img src="https://i.ibb.co/W0dCKsH/image.png" width="50%" alt="reviewer">
+          </div>
+          <div class="review_comment_id_01">
+            <p>김다솔</p>
+          </div>
+          <div class="review_comment_stars_01">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+          </div>
+        </div>
+        <div id="review_commment_02">
+          <div class="review_comment_image_02">
+            <img src="https://i.ibb.co/W0dCKsH/image.png" width="50%" alt="reviewer">
+          </div>
+          <div class="review_comment_id_02">
+            <p>이수연</p>
+          </div>
+          <div class="review_comment_stars_02">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+          </div>
+        </div>
+        <div id="review_commment_03">
+          <div class="review_comment_image_03">
+            <img src="https://i.ibb.co/W0dCKsH/image.png" width="50%" alt="reviewer">
+          </div>
+          <div class="review_comment_id_03">
+            <p>홍지우</p>
+          </div>
+          <div class="review_comment_stars_03">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="3%" alt="yellow_star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+            <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="3%" alt="star">
+          </div>
+        </div>
+      </div>
+      <div id="end">
+        <div class="end_title">
+          <p>다음 화면으로 이동</p>
+        </div>
+        <div class="end_image">
+          <img onclick="location.href='7-05.html'" style="cursor:pointer;" src="https://i.ibb.co/GRTyVN5/arrow.png" width="40px" alt="arrow">
+        </div>
+      </div>
+      <div id="right_bar">
+        <div class="right_title">
+          <p>#해시태그별<br>추천 순위</p>
+        </div>
+        <div id="right_rank">
+          <hr size="3" width="315px" color="grey">
+          <div class="first_rank">
+            <p class="first_rank_title_01" style="display: inline-block;">#수학 </p>
+            <p class="first_rank_title_02" style="display: inline-block;"> 에서 가장 많이 추천된 책</p>
+            <p class="first_rank_title_03">1위 수학없는 세상은 싫어<br>2위 수학이 최고야<br>3위 숫자없는 수학 풀이<br>4위 엄마! 수학 더 주세요!<br>5위 수학의 자신감 쎈!</p>
+          </div>
+          <hr size="3" width="315px" color="grey">
+          <div class="second_rank">
+            <p class="second_rank_title_01" style="display: inline-block;">#영어 </p>
+            <p class="second_rank_title_02" style="display: inline-block;"> 에서 가장 많이 추천된 책</p>
+            <p class="second_rank_title_03">1위 영어가 세상을 지배한다<br>2위 내가 영어로 성공한 법<br>3위 영어가 제일 쉬웠어요<br>4위 영어? 누워서 식은 죽 먹기지!<br>5위 위대한 개츠비</p>
+          </div>
+        </div>
+      </div>   
+    </body>
+</html>

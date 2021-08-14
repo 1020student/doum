@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UFT-8">
+        <title>Doum : 생활기록부 도서 추천</title>
+        <style>
+        body{
+          background-color: #ECF0F3;
+        }
+        @font-face {
+          font-family: 'GmarketSansMedium';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'GmarketSansBold';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        </style>
+        <style>
+        .left_bar{
+          height: 100%;
+          max-width: 0;
+          background-color: #ffffff;
+          text-align: center;
+          transition: 0.3s ease;
+          z-index: 1;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .team_title{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-size: 250%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 0px;
+          left: 70px;
+        }
+        .left_title_01{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 90px;
+          left: 30px;
+        }
+        .left_title_02{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 90px;
+          left: 125px;
+        }
+        .hashtag_subject_title{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 140px;
+          left: 35px;
+        }
+        .hashtag_subject_choice{
+          width: 300px;
+          max-width: 0;
+          font-size: 120%;
+          line-height: 180%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 195px;
+          left: 35px;
+          display: none;
+        }
+        .hashtag_feature_title{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 300px;
+          left: 35px;
+        }
+        .hashtag_feature_choice{
+          width: 300px;
+          max-width: 0;
+          font-size: 120%;
+          line-height: 180%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 355px;
+          left: 35px;
+          display: none;
+        }
+        input[id="Korean"],[id="science"],[id="socialstudy"],[id="math"],[id="english"],[id="culture"],[id="introduction"],[id="speciality"]{
+          position: relative;
+          top: 2.5px;
+        }
+        .burger-icon{
+          cursor: pointer;
+          display: inline-block;
+          position: absolute;
+          z-index: 4;
+          padding: 8px 0;
+          top: 30px;
+          left: 40px;
+          user-select: none;
+          width: auto;
+          margin: 0;
+        }
+        .burger-icon .burger-sticks{
+          background: grey;
+          display: block;
+          height: 3px;
+          position: relative;
+          width: 30px;
+        }
+        .burger-icon .burger-sticks:before,
+        .burger-icon .burger-sticks:after{
+          background: grey;
+          content: '';
+          display: block;
+          height: 100%;
+          position: absolute;
+          width: 100%;
+        }
+        .burger-icon .burger-sticks:before{
+          top: 5px;
+        }
+        .burger-icon .burger-sticks:after{
+          top: -5px;
+        }
+        .burger-check{
+          display: none;
+        }
+        .burger-check:checked~.left_bar{
+          max-width: 300px;
+        }
+        .burger-check:checked~.team_title,
+        .burger-check:checked~.left_title_01,
+        .burger-check:checked~.left_title_02{
+          max-width: 200px;
+        }
+        .burger-check:checked~.hashtag_subject_title,
+        .burger-check:checked~.hashtag_subject_choice,
+        .burger-check:checked~.hashtag_feature_title,
+        .burger-check:checked~.hashtag_feature_choice{
+          max-width: 200px;
+        }
+        .burger-check:checked~.burger-icon .burger-sticks{
+          background: transparent;
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before{
+          width: 20px;
+          position: absolute;
+          top: 0px;
+          left: 210px;
+          transform: rotate(-45deg);
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after{
+          width: 20px;
+          position: absolute;
+          top: 0px;
+          left: 210px;
+          transform: rotate(45deg);
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before,
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after{
+          top: 0;
+        }
+        .burger-check:checked~.hashtag_feature_choice,
+        .burger-check:checked~.hashtag_subject_choice{
+          display: block;
+        }
+        </style>
+        <style>
+        #header{
+          height: 20%;
+          width: 96%;
+          margin-top: -0.5%;
+          margin-bottom: -0.5%;
+          margin-left: 2%;
+          margin-right: 2%;
+          font-size: 170%;
+          font-family: 'GmarketSansMedium';
+          text-align: center;
+        }
+        #main{
+          width: 60%;
+          height: 77%;
+          margin-top: -1%;
+          margin-left: 3%;
+          margin-right: 3%;
+          border-radius: 40px;
+          background-color: #ECF0F3;
+          padding-left: 3%;
+          padding-right: 3%;
+          padding-bottom: 3%;
+          box-shadow: 5px 5px 15px rgb(197, 197, 197);
+          text-align: left;
+          font-family: 'GmarketSansBold';
+          position: fixed;
+          top: 120px;
+          left: 0px;
+        }
+        .question{
+          height: auto;
+          margin-left: 2%;
+          margin-bottom: -1%;
+          font-size: 230%;
+          font-family: 'GmarketSansMedium'; 
+        }
+        button{
+          background: linear-gradient(to left top,#ffffff,#ffffff);
+          width: 100%;
+          height: 483px;
+          padding-left: 4%;
+          border-radius: 40px;
+          border: none;             
+          font-size: 230%;
+          text-align: left;
+          line-height: 190%;
+          font-family: 'GmarketSansMedium';
+        }
+        input[id="humanities"],[id="socialscience"],[id="engineering"],[id="naturalscience"],[id="medical"]{
+          position: relative;
+          top: 2px;
+        }
+        #end{
+          text-align: right;
+          font-family: 'GmarketSansMedium';
+        }
+        .end_title{
+          font-size: 130%;
+          position: fixed;
+          top: 710px;
+          left: 730px;
+        }
+        .end_image{
+          position: fixed;
+          top: 728px;
+          left: 910px;
+        }
+        </style>
+        <style>
+        #right_bar{
+          width: 25%;
+          height: 82%;
+          margin-top: -1%;
+          margin-right: 3%;
+          border-radius: 40px;
+          background-color: #ECF0F3;
+          box-shadow: 5px 5px 15px rgb(197, 197, 197);
+          font-size: 250%;
+          text-align: center;
+          letter-spacing: -1px;
+          word-spacing: 1px;
+          font-family: 'GmarketSansBold';
+          position: fixed;
+          top: 120px;
+          right: 0px;
+        }
+        .right_title{
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          margin-top: -3%;
+          margin-left: 8%;
+          margin-right: 8%;
+          line-height: 150%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+        }
+        #right_rank{
+          width: 95%;
+          height: 100%;
+          margin-top: -6%;
+          margin-left: 3%;
+          margin-right: 3%;
+          font-size: 50%;
+          text-align: center;
+          font-family: 'GmarketSansMedium';
+        }
+        .first_rank{
+          margin-left: 7%;
+          margin-right: 7%;
+          text-align: left;
+        }
+        .first_rank_title_01{
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+        }
+        .first_rank_title_03{
+          margin-top: -2%;
+          line-height: 150%;
+        }
+        .second_rank{
+          margin-top: 1%;
+          margin-left: 7%;
+          margin-right: 7%;
+          text-align: left;
+        }
+        .second_rank_title_01{
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+        }
+        .second_rank_title_03{
+          margin-top: -2%;
+          line-height: 150%;
+        }
+        </style>
+        <style>
+        hr{
+          text-align: center;
+        }
+    </style>
+    </head>
+    <body>
+      <input class="burger-check" type="checkbox" id="burger-check" /><label class="burger-icon" for="burger-check"><span class="burger-sticks"></span></label>
+      <div class="left_bar" style="width: 300px;"></div>
+      <div class="team_title">
+        <p>코사인팀</p>
+      </div>
+      <p class="left_title_01" style="display: inline-block;">#해시태그</p>
+      <p class="left_title_02" style="display: inline-block;">로 책 검색하기</p>
+      <div class="hashtag_subject_title">
+         <p>과목별</p>
+      </div>
+      <div class="hashtag_subject_choice">
+        <label></label><input style="zoom:1.5;" type="checkbox" id="Korean" name="Korean" value="1">#국어</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="science" name="science" value="2">#과학</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="socialstudy" name="socialstudy" value="3">#사회</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="math" name="math" value="4">#수학</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="english" name="english" value="5">#영어</label>
+      </div>
+      <div class="hashtag_feature_title">
+        <p>책의 특성</p>
+      </div>
+      <div class="hashtag_feature_choice">
+        <label><input style="zoom:1.5;" type="checkbox" id="culture" name="culture" value="6">#교양</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="introduction" name="introduction" value="7">#입문</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="speciality" name="speciality" value="8">#전문</label>
+      </div> 
+      <div id="header">
+        <p>Doum</p>
+      </div>
+      <hr size="3" width="97%" color="grey">
+      <div id="main">
+        <div class="question">
+          <p>Q. 희망 학과 계열을 선택해주세요.</p>
+        </div>
+        <div id="choice">
+          <button>
+            <form method="get">
+            <label><input style="zoom:2.5;" type="checkbox" id="humanities" name="department" value="1" onclick="oneCheckbox(this)"> 인문대학
+              <label style="font-size: 50%">(어문계열, 사학, 철학, 종교학, 미학 등)</label>
+            </label><br>
+            <label><input style="zoom:2.5;" type="checkbox" id="socialscience" name="department" value="2" onclick="oneCheckbox(this)"> 사회과학대학</label>
+              <label style="font-size: 50%">(정치외교, 경제학, 사회학, 인류학, 심리학, 지리학 등)</label>
+            <label><br>
+            <label><input style="zoom:2.5;" type="checkbox" id="engineering" name="department" value="3" onclick="oneCheckbox(this)"> 공과대학</label>
+              <label style="font-size: 50%">(건설, 기계공학, 항공우주공학, 전기공학, 컴퓨터공학 등)</label>
+            <label><br>
+            <label><input style="zoom:2.5;" type="checkbox" id="naturalscience" name="department" value="4" onclick="oneCheckbox(this)"> 자연과학대학</label>
+              <label style="font-size: 50%">(수리과학, 통계학, 물리학, 화학, 생명과학, 지구과학 등)</label>
+            <label><br>
+            <label><input style="zoom:2.5;" type="checkbox" id="medical" name="department" value="5" onclick="oneCheckbox(this)"> 의과대학</label>
+              <label style="font-size: 50%">(의예, 의학, 약학, 제약학, 간호학, 수의예, 수의학 등)</label>
+            <label><br>
+            </form>
+          </button>
+          <script>
+                function oneCheckbox(a){
+                var obj = document.getElementsByName("department");
+                for(var i=0; i<obj.length; i++){
+                if(obj[i] != a){
+                obj[i].checked = false;
+                    }
+                  }
+                }   
+          </script>
+        </div>
+      </div> 
+      <div id="end">
+        <div class="end_title">
+          <p>다음 문항으로 이동</p>
+        </div>
+        <div class="end_image">
+          <img onclick="location.href='7-03.html'" style="cursor:pointer;" src="https://i.ibb.co/GRTyVN5/arrow.png" width="40px" alt="arrow">
+        </div>
+      </div>   
+      <div id="right_bar">
+        <div class="right_title">
+          <p>#해시태그별<br>추천 순위</p>
+        </div>
+        <div id="right_rank">
+          <hr size="3" width="315px" color="grey">
+          <div class="first_rank">
+            <p class="first_rank_title_01" style="display: inline-block;">#수학 </p>
+            <p class="first_rank_title_02" style="display: inline-block;"> 에서 가장 많이 추천된 책</p>
+            <p class="first_rank_title_03">1위 수학없는 세상은 싫어<br>2위 수학이 최고야<br>3위 숫자없는 수학 풀이<br>4위 엄마! 수학 더 주세요!<br>5위 수학의 자신감 쎈!</p>
+          </div>
+          <hr size="3" width="315px" color="grey">
+          <div class="second_rank">
+            <p class="second_rank_title_01" style="display: inline-block;">#영어 </p>
+            <p class="second_rank_title_02" style="display: inline-block;"> 에서 가장 많이 추천된 책</p>
+            <p class="second_rank_title_03">1위 영어가 세상을 지배한다<br>2위 내가 영어로 성공한 법<br>3위 영어가 제일 쉬웠어요<br>4위 영어? 누워서 식은 죽 먹기지!<br>5위 위대한 개츠비</p>
+          </div>
+        </div>
+      </div>   
+    </body>
+</html>
