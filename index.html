@@ -225,46 +225,29 @@
         }
         #main{
           width: 72vw;
-          height: 42vw;
+          height: 42.5vw;
           margin-left: 2vw;
           margin-right: 3vw;
           border-radius: 50px;
-          text-align: left;
+          box-shadow: 10px 10px 20px #b0b0b3, -10px -10px 20px #ffffff;
+          text-align: center;
           font-family: 'GmarketSansBold';
         }
         .question{
-          margin-top: -0.5vw;
-          margin-left: 6vw;
-          font-family: 'GmarketSansBold';
-          font-size: 2.5vw;
+          margin-top: 10vw;
+          font-size: 3.5vw;
         }
-        #department_choice{
-          width: 67vw;
-          height: 33.7vw;
-          margin: 0 auto;
-          margin-top: -1vw;
-          margin-left: 3vw;
-          padding-top: 2vw;
-          padding-left: 2vw;
+        .start_button{
+          width: 50vw;
+          height: 10vw;
+          border: none;
           border-radius: 50px;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
           box-shadow: 10px 10px 20px #b0b0b3, -10px -10px 20px #ffffff;
-          font-family: 'GmarketSansMedium';
-          font-size: 2.5vw;
-          line-height: 180%;
+          text-align: center;
+          font-family: 'GmarketSansBold';
+          font-size: 3.5vw;
         }
-        input[id="a_Korean"],[id="a_science"],[id="a_socialstudy"],[id="a_math"],[id="a_english"],[id="a_no_matter"]{
-          position: relative;
-          top: 2px;
-        }
-        .end_t{
-          margin-left: 48vw;
-          font-family: 'GmarketSansMedium';
-          font-size: 1.5vw;
-        }
-        .end_i{
-          position: relative;
-          top: 0.4vw;
-        } /*불안불안합니다..*/
         </style>
         <style>
         #rank{
@@ -302,7 +285,7 @@
           font-size: 1vw;
           line-height: 0%;
         }
-        </style>
+    </style>
     </head>
     <body>
       <input class="burger-check" type="checkbox" id="burger-check" /><label class="burger-icon" for="burger-check"><span class="burger-sticks"></span></label>
@@ -336,31 +319,8 @@
         <p>Doum</p>
       </div>
       <div id="main" style="float: left;">
-        <div class="question">
-          <p>Q. 추천받길 원하는 관련 과목을 선택해주세요.</p>
-        </div>
-        <div id="department_choice">
-          <label><input style="zoom: 2.5;" type="checkbox" id="a_korean" name="department" value="1"> 국어
-            <label style="font-size: 60%">(화법과 작문, 언어와 매체, 문학, 실용 국어, 심화 국어, 고전 국어)</label>
-          </label><br>
-          <label><input style="zoom: 2.5;" type="checkbox" id="a_science" name="department" value="2"> 과학탐구</label>
-            <label style="font-size: 60%">(물리, 화학, 생명과학, 지구과학 등)</label>
-          <label><br>
-          <label><input style="zoom: 2.5;" type="checkbox" id="a_socialstudy" name="department" value="3"> 사회탐구</label>
-            <label style="font-size: 60%">(생활과 윤리, 윤리와 사상, 지리, 역사, 법과 정치, 경제 등)</label>
-          <label><br>
-          <label><input style="zoom: 2.5;" type="checkbox" id="a_math" name="department" value="4"> 수학</label>
-            <label style="font-size: 60%">(수학(상), 수학(하), 수학1, 수학2, 확률과 통계, 기하, 미적분)</label>
-          <label><br>
-          <label><input style="zoom: 2.5;" type="checkbox" id="a_english" name="department" value="5"> 영어</label>
-          <label><br>
-          <label><input style="zoom: 2.5;" type="checkbox" id="a_no_matter" name="department" value="6"> 상관없음</label>
-          <label><br>
-          <div id="end">
-            <p class="end_t" style="display: inline-block; margin-top: -0.95wv;">다음 문항으로 이동</p>  
-            <img class="end_i" onclick="location.href='8-04.html'" style="display: inline-block; cursor:pointer;" src="https://image.flaticon.com/icons/png/512/1665/1665608.png" width="30vw" alt="arrow"> 
-          </div>
-        </div>
+        <p class="question">간단한 질문을 통해 자신에게<br>도움이 될 도서를 추천해드립니다</p>
+        <button class="start_button" onclick="location.href='8-02.html'" style="cursor:pointer;">시작하기</button> 
       </div> 
       <body>
         <p style="margin-left: 78.5vw; font-family: 'GmarketSansBold'; font-size: 1.5vw;">과목별 추천 순위</p>
