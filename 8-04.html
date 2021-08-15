@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UFT-8">
+        <title>Doum : 생활기록부 도서 추천</title>
+        <style>
+        body{
+          background-color: #EAEBEF;
+          }
+        @font-face{
+          font-family: 'GmarketSansBold';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        @font-face{
+          font-family: 'GmarketSansMedium';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        @font-face{
+          font-family: 'GmarketSansLight';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+        </style>
+        <style>
+        .left_bar{
+          height: 100%;
+          max-width: 0;
+          background-color: #ffffff;
+          text-align: center;
+          transition: 0.3s ease;
+          z-index: 1;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .team_t{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-size: 250%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 0px;
+          left: 70px;
+        }
+        .left_t_01{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,#00FFED,#9D00C6);
+          color: transparent;
+          -webkit-background-clip: text;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          font-weight: bold;
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 90px;
+          left: 30px;
+        }
+        .left_t_02{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 2;
+          position: absolute;
+          top: 90px;
+          left: 125px;
+        }
+        .hashtag_subject_t{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 140px;
+          left: 35px;
+        }
+        .hashtag_subject_choice{
+          width: 300px;
+          max-width: 0;
+          font-size: 120%;
+          line-height: 180%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 195px;
+          left: 35px;
+          display: none;
+        }
+        .hashtag_feature_t{
+          width: 200px;
+          max-width: 0;
+          background: linear-gradient(to left top,black,black);
+          -webkit-background-clip: text;
+          color: transparent;
+          font-size: 130%;
+          font-family: 'GmarketSansBold';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 300px;
+          left: 35px;
+        }
+        .hashtag_feature_choice{
+          width: 300px;
+          max-width: 0;
+          font-size: 120%;
+          line-height: 180%;
+          font-family: 'GmarketSansMedium';
+          transition-delay: 0.1s;
+          z-index: 3;
+          position: absolute;
+          top: 355px;
+          left: 35px;
+          display: none;
+        }
+        input[id="Korean"],[id="science"],[id="socialstudy"],[id="math"],[id="english"],[id="culture"],[id="introduction"],[id="speciality"]{
+          position: relative;
+          top: 2.5px;
+        }
+        .burger-icon{
+          cursor: pointer;
+          display: inline-block;
+          position: absolute;
+          z-index: 4;
+          padding: 0.7vw 0;
+          top: 2vw;
+          left: 2.5vw;
+          user-select: none;
+          width: auto;
+          margin: 0;
+        }
+        .burger-icon .burger-sticks{
+          background: black;
+          display: block;
+          margin-top: 0.3vw;
+          height: 0.15vw;
+          width: 2vw;
+        }
+        .burger-icon .burger-sticks:before,
+        .burger-icon .burger-sticks:after{
+          background: black;
+          content: '';
+          display: block;
+          height: 0.15vw;
+          position: absolute;
+          width: 2vw;
+        }
+        .burger-icon .burger-sticks:before{
+          top: 5px;
+        }
+        .burger-icon .burger-sticks:after{
+          top: -5px;
+        }
+        .burger-check{
+          display: none;
+        }
+        .burger-check:checked~.left_bar{
+          max-width: 300px;
+        }
+        .burger-check:checked~.team_t,
+        .burger-check:checked~.left_t_01,
+        .burger-check:checked~.left_t_02{
+          max-width: 200px;
+        }
+        .burger-check:checked~.hashtag_subject_t,
+        .burger-check:checked~.hashtag_subject_choice,
+        .burger-check:checked~.hashtag_feature_t,
+        .burger-check:checked~.hashtag_feature_choice{
+          max-width: 200px;
+        }
+        .burger-check:checked~.burger-icon .burger-sticks{
+          background: transparent;
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before{
+          width: 2vw;
+          position: absolute;
+          top: 0px;
+          left: 200px;
+          transform: rotate(-45deg);
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after{
+          width: 2vw;
+          position: absolute;
+          top: 0px;
+          left: 200px;
+          transform: rotate(45deg);
+        }
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before,
+        .burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after{
+          top: 0;
+        }
+        .burger-check:checked~.hashtag_feature_choice,
+        .burger-check:checked~.hashtag_subject_choice{
+          display: block;
+        }
+        </style>
+        <style>
+        #header{
+          text-align: center;
+          font-family: 'GmarketSansMedium';
+          font-size: 1.5vw;
+        }
+        .recommend_book_t{
+          margin-top: 0vw;
+          margin-left: 1.5vw;
+          margin-bottom: 2vw;
+          font-family: 'GmarketSansBold';
+          font-size: 1.5vw;
+        }
+        #recommend_book{
+          width: 20vw;
+          height: 41vw;
+          margin-left: 2vw;
+          margin-right: 3vw;
+          border-radius: 50px;
+        }
+        #recommend_book_c{
+          width: 18.5vw;
+          height: 38vw;
+          margin-top: -1vw;
+          margin-right: 3vw;
+          padding-top: 1.5vw;
+          padding-left: 1.5vw;
+          border-radius: 50px;
+          box-shadow: 10px 10px 20px #b0b0b3, -10px -10px 20px #ffffff;
+          font-family: 'GmarketSansMedium';
+          font-size: 1vw;
+          line-height: 240%;
+        }
+        #introduce_book{
+          width: 50vw;
+          height: 40vw;
+          border-radius: 50px;
+          font-family: 'GmarketSansMedium';
+        }
+        .introduce_book_t{
+          margin-top: 0vw;
+          margin-bottom: 1vw;
+          margin-left: 2.5vw;
+          font-family: 'GmarketSansBold';
+          font-size: 1.5vw;
+        }
+        #about_book{
+          width: 47vw;
+          height: 38vw;
+          margin-right: 3vw;
+          padding-top: 1.5vw;
+          padding-left: 2vw;
+          border-radius: 50px;
+          box-shadow: 10px 10px 20px #b0b0b3, -10px -10px 20px #ffffff;
+          font-family: 'GmarketSansMedium';
+        }
+        .about_book_c{
+          margin-top: 0.5vw;
+          margin-left: 1.5vw;
+          line-height: 10%;
+        }
+        .book_t{
+          margin-top: 2.5vw;
+          font-family: 'GmarketSansBold';
+          font-size: 3vw;
+        }
+        .author_publisher{
+          margin-top: -1vw;
+          font-family: 'GmarketSansBold';
+          font-size: 1.5vw;
+        }
+        .subject{
+          font-family: 'GmarketSansMedium';
+          font-size: 1.5vw;
+        }
+        .score{
+          margin-top: -0.45vw;
+          font-family: 'GmarketSansMedium';
+          font-size: 1.5vw;
+        }
+        .keyword{
+          margin-top: -0.1vw;
+          margin-bottom: 0.2vw;
+          font-family: 'GmarketSansMedium';
+          font-size: 1.5vw;
+        }
+        #end{
+          margin-top: 32.59vw;
+        }
+        .end_t{
+          margin-left: 28vw;
+          margin-right: 0.4vw;
+          font-family: 'GmarketSansMedium';
+          font-size: 1.5vw;
+        }
+        .end_i{
+          position: relative;
+          top: 0.35vw;
+        } /*불안불안합니다..*/
+        </style>
+        <style>
+        #rank{
+          margin-left: 2vw;
+          width: 20vw;
+          height: 41vw;
+          border-radius: 50px;
+        }
+        #rank_01{
+          width: 20vw;
+          height: 18.65vw;
+          margin-top: -0.5vw;
+          padding-top: 0.1vw;
+          border-radius: 50px;
+          box-shadow: 10px 10px 20px #b0b0b3, -10px -10px 20px #ffffff;
+          text-align: left;
+        }
+        #rank_02{
+          width: 20vw;
+          height: 18.65vw;
+          margin-top: 2vw;
+          padding-top: 0.1vw;
+          border-radius: 50px;
+          box-shadow: 10px 10px 20px #b0b0b3, -10px -10px 20px #ffffff;
+          text-align: left;
+        }
+        .rank_t{
+          margin-left: 1.7vw;
+          font-family: 'GmarketSansBold';
+          font-size: 1.2vw;
+        }
+        .rank_1st,.rank_2nd,.rank_3rd,.rank_4th,.rank_5th,.rank_6th{
+          margin-top: 2vw;
+          margin-left: 1.7vw;
+          font-family: 'GmarketSansMedium';
+          font-size: 1vw;
+          line-height: 0%;
+        }
+    </style>
+    </head>
+    <body>
+      <input class="burger-check" type="checkbox" id="burger-check" /><label class="burger-icon" for="burger-check"><span class="burger-sticks"></span></label>
+      <div class="left_bar" style="width: 300px;"></div>
+      <div class="team_t">
+        <p>코사인팀</p>
+      </div>
+      <p class="left_t_01" style="display: inline-block;">#해시태그</p>
+      <p class="left_t_02" style="display: inline-block;">로 책 검색하기</p>
+      <div class="hashtag_subject_t">
+         <p>과목별</p>
+      </div>
+      <div class="hashtag_subject_choice">
+        <label></label><input style="zoom:1.5;" type="checkbox" id="Korean" name="Korean" value="1">#국어</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="science" name="science" value="2">#과학</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="socialstudy" name="socialstudy" value="3">#사회</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="math" name="math" value="4">#수학</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="english" name="english" value="5">#영어</label>
+      </div>
+      <div class="hashtag_feature_t">
+        <p>책의 특성</p>
+      </div>
+      <div class="hashtag_feature_choice">
+        <label><input style="zoom:1.5;" type="checkbox" id="culture" name="culture" value="6">#교양</label>
+        <label><input style="zoom:1.5;" type="checkbox" id="introduction" name="introduction" value="7">#입문</label><br>
+        <label><input style="zoom:1.5;" type="checkbox" id="speciality" name="speciality" value="8">#전문</label>
+      </div>
+    </body>
+    <body>
+      <div id="header">
+        <p>Doum</p>
+      </div>
+      <div id="recommend_book" style="float: left;">
+        <p class="recommend_book_t">도서 추천</p>
+        <div id="recommend_book_c">
+          <label><input style="zoom:1;" type="checkbox" id="first_recommend" name="recommend_book" value="1" onclick="oneCheckbox(this)"> [1순위]
+            <label>더 이상한 수학책</label>
+          </label><br>
+          <label><input style="zoom:1;" type="checkbox" id="second_recommend" name="recommend_book" value="2"onclick="oneCheckbox(this)"> [2순위]</label>
+            <label>천재들의 수학노트</label>
+          <label><br>
+          <label><input style="zoom:1;" type="checkbox" id="third_recommend" name="recommend_book" value="3"onclick="oneCheckbox(this)"> [3순위]</label>
+            <label>미분과 적분 : 뉴턴의 대발견</label>
+          <label><br>
+          <label><input style="zoom:1;" type="checkbox" id="random_recommend" name="recommend_book" value="4"onclick="oneCheckbox(this)"> [랜덤]</label>
+            <label>이기적 유전자</label>
+          <label><br>
+          <script>
+            function oneCheckbox(a){
+            var obj = document.getElementsByName("recommend_book");
+            for(var i=0; i<obj.length; i++){
+            if(obj[i] != a){
+            obj[i].checked = false;
+                }
+              }
+            }   
+          </script>
+        </div>
+      </div> 
+      <div id="introduce_book" style="float: left;">
+        <p class="introduce_book_t">도서 정보</p>
+        <div id="about_book">
+          <img class="book_i" style="margin-left: 0.5vw; float: left; margin-top: 1vw;" src="http://image.kyobobook.co.kr/images/book/xlarge/122/x9791191013122.jpg" width="200vw" alt="book">
+          <div class="about_book_c" style="float: left;">
+            <p class="book_t">더 이상한 수학책</p>
+            <div class="author_publisher">
+              <p class="author" style="display: inline-block;">벤 올림</p>
+              <p class="p_slash" style="display: inline-block;">/ </p>
+              <p class="publisher" style="display: inline-block;">북라이프</p>
+            </div>
+            <div class="subject">
+              <p class="subject_t" style="display: inline-block;">관련 과목 : </p>
+              <p class="subject_c" style="display: inline-block;">수학</p>
+            </div>
+            <div class="keyword">
+              <p class="keyword_01" style="display: inline-block;">#수학</p>
+              <p class="keyword_02" style="display: inline-block;">#미적분</p>
+              <p class="keyword_03" style="display: inline-block;">#교양</p>
+            </div>
+            <div class="points">
+              <div id="stars">
+                <div class="stars_i" style="float: left;">
+                  <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="25vw" alt="yellow_star">
+                  <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="25vw" alt="yellow_star">
+                  <img src="https://image.flaticon.com/icons/png/512/1828/1828884.png" width="25vw" alt="yellow_star">
+                  <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="25vw" alt="star">
+                  <img src="https://image.flaticon.com/icons/png/512/1828/1828970.png" width="25vw" alt="star">
+                </div>
+              </div>
+              <div class="score" style=" float: left; margin-left: 1vw;">
+                <p class="score_c" style="display: inline-block;"> 3.0</p>
+                <p class="s_slash" style="display: inline-block;">/ </p>
+                <p class="score_t" style="display: inline-block;">5.0</p>
+              </div>
+            </div>  
+          </div>
+          <div id="end">
+            <p class="end_t" style="display: inline-block; margin-top: -0.95wv;">다음 문항으로 이동</p>  
+            <img class="end_i" onclick="location.href='8-05.html'" style="display: inline-block; cursor:pointer;" src="https://image.flaticon.com/icons/png/512/1665/1665608.png" width="30vw" alt="arrow"> 
+          </div>
+        </div>
+      </div>
+      <body>
+        <p style="margin-left: 78.5vw; font-family: 'GmarketSansBold'; font-size: 1.5vw;">과목별 추천 순위</p>
+        <div id="rank" style="float: left;">
+          <div id="rank_01">
+            <p class="rank_t" style="margin-top: 1.5vw; margin-bottom: -1.4vw;">수학</p>
+            <div class="rank_1st" style="margin-top: 2vw;">
+              <p class="rank_1st_t" style="display: inline-block;">1위</p>
+              <p class="rank_1st_c" style="display: inline-block;">더 이상한 수학책</p>
+            </div>
+            <div class="rank_2nd" style="margin-top: 0.2vw;">
+              <p class="rank_2nd_t" style="display: inline-block;">2위</p>
+              <p class="rank_2nd_c" style="display: inline-block;">천재들의 수학노트</p>
+            </div>
+            <div class="rank_3rd" style="margin-top: 0.2vw;">
+              <p class="rank_3rd_t" style="display: inline-block;">3위</p>
+              <p class="rank_3rd_c" style="display: inline-block;">미분과 적분 : 뉴턴의 대발명</p>
+            </div>
+            <div class="rank_4th" style="margin-top: 0.2vw;">
+              <p class="rank_4th_t" style="display: inline-block;">4위</p>
+              <p class="rank_4th_c" style="display: inline-block;">미적분으로 바라본 하루</p>
+            </div>
+            <div class="rank_5th" style="margin-top: 0.2vw;">
+              <p class="rank_5th_t" style="display: inline-block;">5위</p>
+              <p class="rank_5th_c" style="display: inline-block;">미적분의 쓸모</p>
+            </div>
+            <div class="rank_6th" style="margin-top: 0.2vw;">
+              <p class="rank_6th_t" style="display: inline-block;">6위</p>
+              <p class="rank_6th_c" style="display: inline-block;">미적분의 핵심</p>
+            </div>
+          </div>
+          <div id="rank_02">
+            <p class="rank_t" style="margin-top: 1.5vw; margin-bottom: -1.4vw;">과학</p>
+            <div class="rank_1st" style="margin-top: 2vw;">
+              <p class="rank_1st_t" style="display: inline-block;">1위</p>
+              <p class="rank_1st_c" style="display: inline-block;">이기적 유전자</p>
+            </div>
+            <div class="rank_2nd" style="margin-top: 0.2vw;">
+              <p class="rank_2nd_t" style="display: inline-block;">2위</p>
+              <p class="rank_3nd_c" style="display: inline-block;">정재승의 과학콘서트</p>
+            </div>
+            <div class="rank_3rd" style="margin-top: 0.2vw;">
+              <p class="rank_3rd_t" style="display: inline-block;">3위</p>
+              <p class="rank_3rd_c" style="display: inline-block;">사피엔스</p>
+            </div>
+            <div class="rank_4th" style="margin-top: 0.2vw;">
+              <p class="rank_4th_t" style="display: inline-block;">4위</p>
+              <p class="rank_4th_c" style="display: inline-block;">코스모스</p>
+            </div>
+            <div class="rank_5th" style="margin-top: 0.2vw;">
+              <p class="rank_5th_t" style="display: inline-block;">5위</p>
+              <p class="rank_5th_c" style="display: inline-block;">엔트로피</p>
+            </div>
+            <div class="rank_6th" style="margin-top: 0.2vw;">
+              <p class="rank_6th_t" style="display: inline-block;">6위</p>
+              <p class="rank_6th_c" style="display: inline-block;">종의 기원</p>
+            </div>
+          </div>
+        </div>
+      </body>
+    </body>
+</html>
