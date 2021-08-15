@@ -252,7 +252,7 @@
           font-size: 2.5vw;
           line-height: 180%;
         }
-        input[id="humanities"],[id="socialscience"],[id="engineering"],[id="naturalscience"],[id="medical"]{
+        input[id="a_Korean"],[id="a_science"],[id="a_socialstudy"],[id="a_math"],[id="a_english"],[id="a_no_matter"]{
           position: relative;
           top: 2px;
         }
@@ -337,39 +337,30 @@
       </div>
       <div id="main" style="float: left;">
         <div class="question">
-          <p>Q. 희망 학과 계열을 선택해주세요.</p>
+          <p>Q. 추천받길 원하는 관련 과목을 선택해주세요.</p>
         </div>
         <div id="department_choice">
-          <label><input style="zoom: 3.5;" type="checkbox" id="humanities" name="department" value="1" onclick="oneCheckbox(this)"> 인문대학
-            <label style="font-size: 60%">(어문계열, 사학, 철학, 종교학, 미학 등)</label>
+          <label><input style="zoom: 2.5;" type="checkbox" id="a_korean" name="department" value="1"> 국어
+            <label style="font-size: 60%">(화법과 작문, 언어와 매체, 문학, 실용 국어, 심화 국어, 고전 국어)</label>
           </label><br>
-          <label><input style="zoom: 3.5;" type="checkbox" id="socialscience" name="department" value="2" onclick="oneCheckbox(this)"> 사회과학대학</label>
-            <label style="font-size: 60%">(정치외교, 경제학, 사회학, 인류학, 심리학, 지리학 등)</label>
+          <label><input style="zoom: 2.5;" type="checkbox" id="a_science" name="department" value="2"> 과학탐구</label>
+            <label style="font-size: 60%">(물리, 화학, 생명과학, 지구과학 등)</label>
           <label><br>
-          <label><input style="zoom: 3.5;" type="checkbox" id="engineering" name="department" value="3" onclick="oneCheckbox(this)"> 공과대학</label>
-            <label style="font-size: 60%">(건설, 기계공학, 항공우주공학, 전기공학, 컴퓨터공학 등)</label>
+          <label><input style="zoom: 2.5;" type="checkbox" id="a_socialstudy" name="department" value="3"> 사회탐구</label>
+            <label style="font-size: 60%">(생활과 윤리, 윤리와 사상, 지리, 역사, 법과 정치, 경제 등)</label>
           <label><br>
-          <label><input style="zoom: 3.5;" type="checkbox" id="naturalscience" name="department" value="4" onclick="oneCheckbox(this)"> 자연과학대학</label>
-            <label style="font-size: 60%">(수리과학, 통계학, 물리학, 화학, 생명과학, 지구과학 등)</label>
+          <label><input style="zoom: 2.5;" type="checkbox" id="a_math" name="department" value="4"> 수학</label>
+            <label style="font-size: 60%">(수학(상), 수학(하), 수학1, 수학2, 확률과 통계, 기하, 미적분)</label>
           <label><br>
-          <label><input style="zoom: 3.5;" type="checkbox" id="medical" name="department" value="5" onclick="oneCheckbox(this)"> 의과대학</label>
-            <label style="font-size: 60%">(의예, 의학, 약학, 제약학, 간호학, 수의예, 수의학 등)</label>
+          <label><input style="zoom: 2.5;" type="checkbox" id="a_english" name="department" value="5"> 영어</label>
           <label><br>
-          <script>
-                function oneCheckbox(a){
-                var obj = document.getElementsByName("department");
-                for(var i=0; i<obj.length; i++){
-                if(obj[i] != a){
-                obj[i].checked = false;
-                    }
-                  }
-                }   
-          </script>
-        <div id="end">
-          <p class="end_t" style="display: inline-block; margin-top: -0.95wv;">다음 문항으로 이동</p>  
-          <img class="end_i" onclick="location.href='8-03.html'" style="display: inline-block; cursor:pointer;" src="https://image.flaticon.com/icons/png/512/1665/1665608.png" width="30vw" alt="arrow"> 
+          <label><input style="zoom: 2.5;" type="checkbox" id="a_no_matter" name="department" value="6"> 상관없음</label>
+          <label><br>
+          <div id="end">
+            <p class="end_t" style="display: inline-block; margin-top: -0.95wv;">다음 문항으로 이동</p>  
+            <img class="end_i" onclick="location.href='8-04.html'" style="display: inline-block; cursor:pointer;" src="https://image.flaticon.com/icons/png/512/1665/1665608.png" width="30vw" alt="arrow"> 
+          </div>
         </div>
-      </div>
       </div> 
       <body>
         <p style="margin-left: 78.5vw; font-family: 'GmarketSansBold'; font-size: 1.5vw;">과목별 추천 순위</p>
