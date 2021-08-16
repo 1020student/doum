@@ -340,6 +340,7 @@
           <p>Q. 희망 학과 계열을 선택해주세요.</p>
         </div>
         <div id="department_choice">
+            <form onSubmit="checkResult(this)">
           <label><input style="zoom: 3.5;" type="checkbox" id="humanities" name="department" value="1" onclick="oneCheckbox(this)"> 인문대학
             <label style="font-size: 60%">(어문계열, 사학, 철학, 종교학, 미학 등)</label>
           </label><br>
@@ -354,16 +355,31 @@
           <label><br>
           <label><input style="zoom: 3.5;" type="checkbox" id="medical" name="department" value="5" onclick="oneCheckbox(this)"> 의과대학</label>
             <label style="font-size: 60%">(의예, 의학, 약학, 제약학, 간호학, 수의예, 수의학 등)</label>
-          <label><br>
-          <script>
-            function oneCheckbox(a){
-            var obj = document.getElementsByName("department");
-            for(var i=0; i<obj.length; i++){
-            if(obj[i] != a){
-            obj[i].checked = false;
-                }
-              }
-            }   
+          <label>
+          </form><br>
+    <script>
+    function oneCheckbox(a){
+    var obj = document.getElementsByName("department");
+    for(var i=0; i<obj.length; i++){
+    if(obj[i] != a){
+    obj[i].checked = false;
+      }
+    }
+}  
+  function checkResult(){
+var isDepartment = false;
+var arr_Department = document.getElementsByName("department");
+for(var i=0;i<arr_Department.length;i++){
+  if(arr_Department[i].checked == true) {
+      isDepartment = true;
+      break;
+     }
+  }
+if(!isDepartment){
+      alert("원하는 학과를 선택해주세요");
+      return false;
+    }
+} 
           </script>
         <div id="end">
           <p class="end_t" style="display: inline-block; margin-top: -0.95wv;">다음 문항으로 이동</p>  
